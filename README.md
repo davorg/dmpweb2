@@ -1,80 +1,29 @@
-# Influencer Free Bootstrap Single Book Template
+# datamungingwithperl.com
 
-![influencer](https://demo.themefisher.com/thumbnails/influencer.png)
+Source for the single-page website for *Data Munging with Perl*
+(2nd edition), live (currently unlinked) at
+[new.datamungingwithperl.com](https://new.datamungingwithperl.com/).
 
-👉🏻[View Live Preview](https://demo.themefisher.com/influencer/)
+## How this works
 
-<!-- download -->
-## Download And installation
+The site is a single static HTML page: `docs/index.html`. There is no
+build step — edit that file directly and commit. `docs/CNAME` sets the
+custom domain; the site is served via GitHub Pages from the `docs/`
+folder of this repo.
 
-Download this template from [Github](https://github.com/themefisher/influencer/archive/main.zip)
+The page started from the [Themefisher "Influencer"](https://github.com/themefisher/influencer)
+Bootstrap template (see `LICENSE` for the template's original MIT
+licence, which still applies to the reused CSS/JS/plugins in
+`docs/plugins` and `docs/css`). The template's own `gulp`/SCSS source
+build was dropped (2026-08-06) since the site had already been
+maintained by hand-editing `docs/index.html` directly for some time,
+making the build pipeline dead weight.
 
-<!-- installation -->
-### Basic Usages
+## Structure
 
-After downloading the template, you can simply edit the HTML and CSS files from the `theme` folder. To preview the changes you make to the code, you can open the index.html file in your web browser.
-
-### Advanced Usage
-
-For advanced usage, you have some prerequisites to install. Then you can run it on your localhost. You can view the package.json file to see which scripts are included.
-
-#### Install prerequisites (once for a machine)
-
-* **Node Installation:** [Install node js](https://nodejs.org/en/download/)
-* **Gulp Installation:** Install gulp globally from your terminal
-
-```
-npm install --global gulp-cli
-```
-
-Or visit the original [Gulp docs](https://gulpjs.com/docs/en/getting-started/quick-start)
-
-#### Local setup
-
-After successfully installing those dependencies, open this theme with any IDE [[VS Code](https://code.visualstudio.com/) recommended], and then open the internal terminal of IDM [vs code shortcut <code>ctrl/cmd+\`</code>]
-
-* Install dependencies
-
-```
-npm install
-```
-
-* Run locally
-
-```
-npm run dev
-```
-
-After that, it will open up a preview of the template in your default browser, watch for changes to source files, and live reload the browser when changes are saved.
-
-#### Production Build
-
-After finishing all the customization, you can create a production build by running this command.
-
-```
-npm run build
-```
-
-Now you get a `theme` folder that has all the changes you have made. you can use this folder as your main theme.
-
-👉🏻 [visit documentation](https://docs.themefisher.com/influencer/)
-
-<!-- reporting issue -->
-## Reporting Issues
-
-We use GitHub Issues as the official bug tracker for the influencer Template. Please Search [existing issues](https://github.com/themefisher/influencer/issues). It’s possible someone has already reported the same problem.
-If your problem or idea has not been addressed yet, feel free to [open a new issue](https://github.com/themefisher/influencer/issues).
-
-<!-- support -->
-## Technical Support or Questions (Paid)
-
-If you have questions or need help integrating the product please [contact us](mailto:mehedi@themefisher.com) instead of opening an issue.
-
-<!-- licence -->
-## License
-
-Copyright (c) 2016 - Present, Designed & Developed by [Themefisher](https://themefisher.com)
-
-**Code License:** Released under the [MIT](https://github.com/themefisher/influencer/blob/main/LICENSE) license.
-
-**Image license:** The images are only for demonstration purposes. They have their license, we don't have permission to share those images.
+* `docs/index.html` — the whole page.
+* `docs/css/style.css` — compiled stylesheet (edit directly; no SCSS source any more).
+* `docs/js/theme.js` — page behaviour (carousels, smooth-scroll nav, etc).
+* `docs/images/` — images used on the page.
+* `docs/plugins/` — third-party JS/CSS (Bootstrap, jQuery, Slick Carousel, etc.), from the original template.
+* `docs/blog-single.html` — template leftover for a single blog post view; not currently linked to real content.
