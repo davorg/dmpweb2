@@ -1,8 +1,8 @@
 # datamungingwithperl.com
 
 Source for the single-page website for *Data Munging with Perl*
-(2nd edition), live (currently unlinked) at
-[new.datamungingwithperl.com](https://new.datamungingwithperl.com/).
+(2nd edition), live at
+[datamungingwithperl.com](https://datamungingwithperl.com/).
 
 ## How this works
 
