@@ -511,6 +511,8 @@ h1 {
   padding: 30px;
   box-shadow: 12px 7px 90px 0 rgba(110, 123, 131, 0.1);
   margin-bottom: 30px;
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
 }
 .chapter-item h4 {
   margin-bottom: 20px;
@@ -518,6 +520,21 @@ h1 {
   font-size: 18px;
   letter-spacing: 1px;
   color: #cc302b;
+}
+
+/* Two-column layout for the chapter overview. Using CSS columns (rather
+   than splitting the chapters into two Bootstrap columns in the markup)
+   keeps the chapters in reading order (1, 2, 3...) in the DOM, so they
+   stack in the correct order when this collapses to a single column on
+   narrow screens. */
+.chapter-columns {
+  column-count: 1;
+}
+@media (min-width: 576px) {
+  .chapter-columns {
+    column-count: 2;
+    column-gap: 30px;
+  }
 }
 
 .book-preview {
