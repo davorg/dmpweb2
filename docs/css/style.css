@@ -511,8 +511,6 @@ h1 {
   padding: 30px;
   box-shadow: 12px 7px 90px 0 rgba(110, 123, 131, 0.1);
   margin-bottom: 30px;
-  break-inside: avoid;
-  -webkit-column-break-inside: avoid;
 }
 .chapter-item h4 {
   margin-bottom: 20px;
@@ -522,17 +520,20 @@ h1 {
   color: #cc302b;
 }
 
-/* Two-column layout for the chapter overview. Using CSS columns (rather
-   than splitting the chapters into two Bootstrap columns in the markup)
-   keeps the chapters in reading order (1, 2, 3...) in the DOM, so they
-   stack in the correct order when this collapses to a single column on
-   narrow screens. */
+/* Two-column layout for the chapter overview. A CSS grid (rather than
+   splitting the chapters into two Bootstrap columns, or using CSS
+   multi-column) keeps the chapters in reading order (1, 2, 3...) in
+   the DOM, and grid's default row-first auto-flow lays them out as
+   Chapter 1 / Chapter 2 on row one, Chapter 3 / Chapter 4 on row two,
+   and so on - while a single-column grid on narrow screens just
+   stacks them in that same correct order. */
 .chapter-columns {
-  column-count: 1;
+  display: grid;
+  grid-template-columns: 1fr;
 }
 @media (min-width: 576px) {
   .chapter-columns {
-    column-count: 2;
+    grid-template-columns: 1fr 1fr;
     column-gap: 30px;
   }
 }
