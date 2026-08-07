@@ -3,15 +3,15 @@
     "date": "2026-08-07",
     "title": "New website is live",
     "paragraphs": [
-      "This site has had a full refresh — real content throughout, a proper social sharing card, and a new home at datamungingwithperl.com.",
-      "If you spot anything that still looks like leftover template text, let us know."
+      "This site has had a full refresh, covering the second edition.",
+      "Most importantly, I've added this section, so you can track what I'm doing."
     ]
   },
   {
     "date": "2026-08-06",
     "title": "Work-in-progress edition now on Leanpub",
     "paragraphs": [
-      "The second edition is now available to read as it's being written, at roughly 65% complete.",
+      "The second edition has been available as a work in progress from LeanPub for some time. But I've finally worked out how to add a progress indicator to the book page and how to send emails to customers whenever it is updated.",
       "Buying the work-in-progress edition gets you free updates as new chapters land, right through to the finished book."
     ]
   },
@@ -20,7 +20,8 @@
     "title": "Chapter 10 rewritten: JSON, YAML and XML",
     "paragraphs": [
       "Chapter 10 has been retitled \"Common Data Interchange Formats\" and rebuilt around the three formats you'll actually meet in the wild: JSON, YAML and XML.",
-      "New sections cover JSON::MaybeXS and YAML::PP with a live weather-API example, alongside a modernized XML::LibXML treatment that replaces the old XML::Parser/XML::DOM material."
+      "New sections cover JSON::MaybeXS and YAML::PP with a live weather-API example, alongside a modernized XML::LibXML treatment that replaces the old XML::Parser/XML::DOM material.",
+      "Completion estimate: 65%"
     ]
   }
 ]
