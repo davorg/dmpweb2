@@ -1,0 +1,54 @@
+name: Build updates section
+
+# Regenerates the "Latest Updates" section in docs/index.html from
+# data/updates.yaml (see bin/build-updates) and commits the result.
+#
+# Triggered by pushes that touch data/updates.yaml, so editing the
+# YAML and pushing is all that's needed -- no need to remember to run
+# the script locally. Can also be run by hand from the Actions tab
+# (workflow_dispatch) if the template in bin/build-updates changes
+# without the data changing.
+#
+# The commit this workflow makes only touches docs/index.html, not
+# data/updates.yaml, so it doesn't re-trigger itself.
+
+"on":
+  push:
+    branches: [main]
+    paths:
+      - 'data/updates.yaml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Perl
+        uses: shogo82148/actions-setup-perl@v1
+        with:
+          perl-version: '5.38'
+
+      - name: Install dependencies
+        run: cpanm --notest YAML::PP
+
+      - name: Regenerate docs/index.html
+        run: perl bin/build-updates
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet -- docs/index.html; then
+            echo "docs/index.html already up to date, nothing to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/index.html
+          git commit -m "Regenerate Latest Updates section from data/updates.yaml [skip ci]"
+          git push

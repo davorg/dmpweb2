@@ -1,0 +1,149 @@
+#!/usr/bin/env perl
+
+# Reads data/updates.yaml and regenerates the "Latest Updates" section
+# in docs/index.html between the <!-- updates:start --> / :end markers.
+#
+# The updates section used to be filled in by client-side JS fetching
+# a JSON file -- but that meant editing the JSON was pointless without
+# a full GitHub Pages redeploy, and the content was invisible to
+# crawlers/LLMs until then anyway. This replaces that with a build
+# step: edit data/updates.yaml, run this script (or just push -- see
+# .github/workflows/build-updates.yml), and the rendered HTML gets
+# baked straight into the page that ships.
+#
+# Usage: bin/build-updates
+
+use strict;
+use warnings;
+use v5.20;
+
+use FindBin qw($RealBin);
+use File::Spec;
+use Time::Piece;
+use YAML::PP;
+
+use constant {
+    START_MARKER => '<!-- updates:start -->',
+    END_MARKER   => '<!-- updates:end -->',
+};
+
+my $ROOT       = File::Spec->catdir( $RealBin, '..' );
+my $YAML_FILE  = File::Spec->catfile( $ROOT, 'data', 'updates.yaml' );
+my $INDEX_FILE = File::Spec->catfile( $ROOT, 'docs', 'index.html' );
+
+main();
+
+sub main {
+    my $updates = load_updates($YAML_FILE);
+    my $html    = render_updates($updates);
+
+    my $index = slurp($INDEX_FILE);
+    my $new_index = splice_html( $index, $html );
+
+    if ( $new_index eq $index ) {
+        print "$INDEX_FILE is already up to date.\n";
+        return;
+    }
+
+    spit( $INDEX_FILE, $new_index );
+    print "Updated $INDEX_FILE from ", scalar(@$updates), " update(s).\n";
+}
+
+sub load_updates {
+    my ($file) = @_;
+
+    my $ypp     = YAML::PP->new;
+    my $updates = $ypp->load_file($file);
+
+    die "$file: expected a list of updates\n"
+        unless ref $updates eq 'ARRAY';
+
+    for my $update (@$updates) {
+        for my $field (qw(date title paragraphs)) {
+            die "$file: an entry is missing '$field'\n"
+                unless defined $update->{$field};
+        }
+    }
+
+    # Newest first, regardless of the order they're written in the file.
+    return [ sort { $b->{date} cmp $a->{date} } @$updates ];
+}
+
+sub render_updates {
+    my ($updates) = @_;
+
+    return join "\n", map { render_update($_) } @$updates;
+}
+
+sub render_update {
+    my ($update) = @_;
+
+    my $date  = format_date( $update->{date} );
+    my $title = escape_html( $update->{title} );
+    my $paragraphs = join "\n",
+        map { '                <p>' . escape_html($_) . '</p>' }
+        @{ $update->{paragraphs} };
+
+    return <<"HTML";
+              <div class="update-item">
+                <div class="update-date">$date</div>
+                <h4>$title</h4>
+$paragraphs
+              </div>
+HTML
+}
+
+sub format_date {
+    my ($date) = @_;
+
+    my $t = Time::Piece->strptime( $date, '%Y-%m-%d' );
+
+    # "%-d" (no leading zero) is a glibc extension -- fine on the
+    # Linux runners this is built/deployed on.
+    return $t->strftime('%-d %B %Y');
+}
+
+sub escape_html {
+    my ($text) = @_;
+
+    $text =~ s/&/&amp;/g;
+    $text =~ s/</&lt;/g;
+    $text =~ s/>/&gt;/g;
+
+    return $text;
+}
+
+sub splice_html {
+    my ( $index, $updates_html ) = @_;
+
+    my $start = quotemeta(START_MARKER);
+    my $end   = quotemeta(END_MARKER);
+
+    my $replacement =
+        START_MARKER . "\n" . $updates_html . "              " . END_MARKER;
+
+    my $pattern = qr/$start.*?$end/s;
+
+    die "Couldn't find " . START_MARKER . " / " . END_MARKER
+        . " markers in $INDEX_FILE\n"
+        unless $index =~ $pattern;
+
+    ( my $new_index = $index ) =~ s/$pattern/$replacement/;
+
+    return $new_index;
+}
+
+sub slurp {
+    my ($file) = @_;
+
+    open my $fh, '<:encoding(UTF-8)', $file or die "Can't read $file: $!";
+    local $/;
+    return <$fh>;
+}
+
+sub spit {
+    my ( $file, $content ) = @_;
+
+    open my $fh, '>:encoding(UTF-8)', $file or die "Can't write $file: $!";
+    print {$fh} $content;
+}
