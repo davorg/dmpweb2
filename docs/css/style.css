@@ -185,6 +185,25 @@ Common Styles
   font-size: 3rem;
 }
 
+/* Card/item titles that need to look like a Bootstrap h4/h5 but can't
+   *be* an h4/h5, because their actual heading level (set by document
+   position, not visual size) is h3 or h4. Scoped to each component
+   rather than using Bootstrap's .h4/.h5 utility classes directly on
+   the heading tags themselves - a class like `<h3 class="h4">` reads
+   as a typo waiting to happen (someone "fixing" the mismatch would
+   reintroduce the skipped-heading-level bug this was written to avoid). */
+.service-block h3,
+.test-author-info h3,
+.blog-item-content h3 {
+  font-size: 1.5rem; /* matches h4 */
+}
+
+.feature-item h4,
+.award-block h4,
+.contact-info-block h4 {
+  font-size: 1.25rem; /* matches h5 */
+}
+
 /*-------------------
   BUTTONS STYLE
 ----------------=----*/
