@@ -35,7 +35,7 @@ jobs:
           perl-version: '5.38'
 
       - name: Install dependencies
-        run: cpanm --notest YAML::PP
+        run: cpanm --notest YAML::PP Path::Tiny HTML::Entities
 
       - name: Regenerate docs/index.html
         run: perl bin/build-updates
