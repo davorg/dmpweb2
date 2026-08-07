@@ -13,7 +13,7 @@
 #
 # Usage: bin/build-updates
 #
-# Non-core dependencies: YAML::PP, Path::Tiny, HTML::Entities.
+# Dependencies: see cpanfile (cpanm --installdeps .)
 
 use strict;
 use warnings;

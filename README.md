@@ -54,8 +54,9 @@ To add an update:
    automatically whenever `data/updates.yaml` changes on `main`, and
    commits the regenerated `docs/index.html` back.
 
-You can also run `bin/build-updates` locally (needs `YAML::PP` from
-CPAN) if you want to check the result before pushing, or if you've
-changed the template in the script itself rather than the data — in
-that case, trigger the workflow manually from the Actions tab instead
-of via a `data/updates.yaml` change.
+You can also run `bin/build-updates` locally (`cpanm --installdeps .`
+to get its dependencies, listed in `cpanfile`) if you want to check
+the result before pushing, or if you've changed the template in the
+script itself rather than the data — in that case, trigger the
+workflow manually from the Actions tab instead of via a
+`data/updates.yaml` change.
