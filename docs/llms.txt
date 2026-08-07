@@ -1,0 +1,11 @@
+# Data Munging with Perl
+
+> Second edition of Dave Cross's practical guide to data recognition, parsing,
+> transformation and filtering in Perl. Available as a work-in-progress
+> edition (currently around 65% complete) on Leanpub, with free updates as
+> new chapters land.
+
+## Links
+- [Buy on Leanpub](https://leanpub.com/datamungingwithperl)
+- [Author: Dave Cross](https://davecross.co.uk/)
+- [Perl Hacks blog](https://perlhacks.com/)

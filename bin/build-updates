@@ -91,7 +91,7 @@ sub render_update {
     return <<"HTML";
               <div class="update-item">
                 <div class="update-date">$date</div>
-                <h4>$title</h4>
+                <h3 class="h4">$title</h3>
 $paragraphs
               </div>
 HTML
