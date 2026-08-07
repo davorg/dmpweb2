@@ -1,4 +1,4 @@
-requires 'perl', '5.20';
+requires 'perl', '5.020';
 
 requires 'YAML::PP';
 requires 'Path::Tiny';
