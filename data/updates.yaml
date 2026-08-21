@@ -9,6 +9,13 @@
 # title: plain text, no HTML needed
 # paragraphs: one list item per <p>, plain text, no HTML needed
 
+- date: "2026-08-21"
+  title: "Next update imminent"
+  paragraphs:
+    - "The next update to the WIP version will be released tomorrow."
+    - "This includes updates to the date/time chapter. And a big update on Unicode/UTF8."
+    - "If you've bought the WIP edition, you'll get an email telling you when the new version is available."
+
 - date: "2026-08-07"
   title: "New website is live"
   paragraphs:
