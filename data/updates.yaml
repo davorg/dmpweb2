@@ -10,7 +10,7 @@
 # paragraphs: one list item per <p>, plain text, no HTML needed
 
 - date: "2026-09-04"
-  title: "Unicode, dates and brand-new diagrams"
+  title: "Unicode, Path::Tiny and brand-new diagrams"
   paragraphs:
     - "Chapter 3 gained a new section on Path::Tiny for cleaner, safer file and directory handling."
     - "Every diagram in the book has been redrawn from scratch in a cleaner, more consistent style."
