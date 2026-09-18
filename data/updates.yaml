@@ -9,6 +9,13 @@
 # title: plain text, no HTML needed
 # paragraphs: one list item per <p>, plain text, no HTML needed
 
+- date: "2026-09-18"
+  title: "New testing section, and a chapter 8 tidy-up"
+  paragraphs:
+    - "Chapter 3 gained a new section on testing with Test::More and Test2, plus a rewritten benchmarking section and a database example that now uses SQLite."
+    - "There's also a new section explaining Perl's `use feature` and `use VERSION` pragmas, using modern subroutine signatures as the example."
+    - "Chapter 8 (the introduction to parsers) has had a full refresh, and chapter 5 picked up a short new bit on older text encodings like ISO-8859-X."
+
 - date: "2026-09-04"
   title: "Unicode, Path::Tiny and brand-new diagrams"
   paragraphs:
