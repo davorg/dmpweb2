@@ -382,6 +382,14 @@
             <div id="updates-list" class="updates-list">
               <!-- updates:start -->
               <div class="update-item">
+                <div class="update-date">16 October 2026</div>
+                <h3>Every example now run and checked, plus a new date-handling example and a guide to what needs installing</h3>
+                <p>I've now run every example program in the book on Perl 5.40, and that turned up a surprising number of bugs: a wrong byte in the PNG signature check, a regular expression that captured the wrong part of a number, example files that had drifted away from the listings in the chapters, and a few that no longer worked. They're all fixed, and a set of scripts now checks that the listings in the chapters match the programs that I actually ran.</p>
+                <p>Chapter 6 has a new worked example: finding out when you write code, by analysing the time stamps in a git history (with a warning about the time zone traps along the way). It replaces a web-server-log example that depended on a module that hasn't been updated since 2003. In Chapter 9 the first edition's scraper for a long-dead Yahoo! weather page has been replaced by a short cautionary tale about why scraping is fragile and what to do instead. Chapter 3 gained a runnable Test2::V0 example, and its DBI example now works out of the box with SQLite.</p>
+                <p>Appendix B has a short section on regular expressions and a table showing, chapter by chapter, which modules you need to install from CPAN and which already come with Perl. Chapters 9 and 10 explain HTTP::Tiny, which has been part of Perl since 5.14, and what you need for HTTPS (LWP::Protocol::https for LWP). Chapter 10's weather example has been expanded. I also checked every claim about which version of Perl introduced a feature, corrected several, and made the spelling consistently British.</p>
+              </div>
+
+              <div class="update-item">
                 <div class="update-date">2 October 2026</div>
                 <h3>Regular expressions overhauled, plus chapter audits and a rewritten Appendix B</h3>
                 <p>Chapter 4 (pattern matching and regular expressions) has had a full rewrite: a batch of long-standing bugs fixed, plus proper coverage of named captures, non-greedy quantifiers, lookbehind and `\K`, transliteration with tr///, and the lesser-known `/m`, `/s`, `/a`, `/r` and `/xx` modifiers. There's also a new section on Regexp::Common, a handy library of ready-made patterns, with Appendix A updated to match.</p>
