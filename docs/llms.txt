@@ -1,11 +1,13 @@
 # Data Munging with Perl
 
 > Second edition of Dave Cross's practical guide to data recognition, parsing,
-> transformation and filtering in Perl. Available as a work-in-progress
-> edition (currently around 65% complete) on Leanpub, with free updates as
-> new chapters land.
+> transformation and filtering in Perl. Published on 21 November 2026 as a
+> paperback and Kindle ebook from Amazon, and as a DRM-free PDF and EPUB from
+> Leanpub. Every example has been run and checked on Perl 5.36 to 5.44.
 
 ## Links
-- [Buy on Leanpub](https://leanpub.com/datamungingwithperl)
+- [Buy the paperback on Amazon](https://www.amazon.co.uk/dp/1065495714)
+- [Buy the PDF and EPUB on Leanpub](https://leanpub.com/datamungingwithperl)
+- [Example code and errata reports](https://perlschool.com/books/data-munging/)
 - [Author: Dave Cross](https://davecross.co.uk/)
 - [Perl Hacks blog](https://perlhacks.com/)
