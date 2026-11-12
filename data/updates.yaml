@@ -9,6 +9,11 @@
 # title: plain text, no HTML needed
 # paragraphs: one list item per <p>, plain text, no HTML needed
 
+- date: "2026-11-12"
+  title: "Proof copy approved: publication on 21 November"
+  paragraphs:
+    - "I've approved the proof copy of the paperback, and everything is on target for publication on 21 November 2026, the day of the London Perl Workshop."
+
 - date: "2026-10-16"
   title: "Every example now run and checked, plus a new date-handling example and a guide to what needs installing"
   paragraphs:
