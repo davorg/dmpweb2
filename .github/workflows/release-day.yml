@@ -1,0 +1,79 @@
+name: Publication day
+
+# Merges the draft "publication-day" pull request (the homepage changes for the
+# second edition) and regenerates the "Latest Updates" section.
+#
+#  * Runs by itself at 05:47 UTC on 21 November, 30 minutes after the Perl
+#    School site's release workflow (05:17), so the catalogue is already updated
+#    when the homepage starts saying the book is published. Scheduled runs can
+#    start several minutes late. The year check stops it doing anything on 21
+#    November in later years.
+#  * Run it by hand from the Actions tab to test: "dry run" (on by default)
+#    only reports the pull request's state; it merges nothing.
+#  * Merging with the built-in token does not start the "Build updates section"
+#    workflow, so it is started explicitly afterwards (it also commits with the
+#    built-in token). GitHub Pages deploys from the main branch by itself.
+
+"on":
+  schedule:
+    - cron: '47 5 21 11 *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run: report the pull request but do not merge it'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      BRANCH: publication-day
+      DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+    steps:
+      - name: Only in 2026
+        if: github.event_name == 'schedule'
+        run: |
+          if [ "$(date -u +%Y)" != "2026" ]; then
+            echo "::notice::Not 2026: nothing to do"
+            echo "SKIP=1" >> "$GITHUB_ENV"
+          fi
+
+      - name: Find the pull request
+        if: env.SKIP != '1'
+        run: |
+          pr=$(gh pr list --head "$BRANCH" --base main --state open --json number --jq '.[0].number // empty')
+          if [ -z "$pr" ]; then
+            echo "::notice::No open pull request from $BRANCH: already merged? Nothing to do"
+            echo "SKIP=1" >> "$GITHUB_ENV"
+            exit 0
+          fi
+          echo "PR=$pr" >> "$GITHUB_ENV"
+          gh pr view "$pr" --json number,title,isDraft,mergeable,mergeStateStatus \
+            --template 'PR #{{.number}}: {{.title}}{{"\n"}}draft={{.isDraft}} mergeable={{.mergeable}} state={{.mergeStateStatus}}{{"\n"}}'
+          if [ "$(gh pr view "$pr" --json mergeable --jq .mergeable)" = "CONFLICTING" ]; then
+            echo "::error::PR #$pr has merge conflicts: resolve them by hand"
+            exit 1
+          fi
+
+      - name: Dry run - stop here
+        if: env.SKIP != '1' && env.DRY_RUN == 'true'
+        run: echo "Dry run - nothing merged, no rebuild."
+
+      - name: Mark ready and merge
+        if: env.SKIP != '1' && env.DRY_RUN != 'true'
+        run: |
+          gh pr ready "$PR"
+          gh pr merge "$PR" --squash --delete-branch
+
+      - name: Regenerate the updates section
+        if: env.SKIP != '1' && env.DRY_RUN != 'true'
+        run: gh workflow run build-updates.yml --ref main
