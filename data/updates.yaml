@@ -9,6 +9,12 @@
 # title: plain text, no HTML needed
 # paragraphs: one list item per <p>, plain text, no HTML needed
 
+- date: "2026-11-21"
+  title: "Data Munging with Perl, second edition, is published"
+  paragraphs:
+    - "The second edition is out today, the day of the London Perl Workshop. The paperback and the Kindle edition are on Amazon, and the final PDF and EPUB are on Leanpub: if you bought the work-in-progress edition there, the finished book is already in your library."
+    - "The example code is free to download from the book's page on perlschool.com, which is also where you can report any mistakes. Thank you to everyone who bought and read the work-in-progress edition."
+
 - date: "2026-11-12"
   title: "Proof copy approved: publication on 21 November"
   paragraphs:
