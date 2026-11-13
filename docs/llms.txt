@@ -7,6 +7,7 @@
 
 ## Links
 - [Buy the paperback on Amazon](https://www.amazon.co.uk/dp/1065495714)
+- [Buy the Kindle edition on Amazon](https://www.amazon.co.uk/dp/B0HRFX47Y7)
 - [Buy the PDF and EPUB on Leanpub](https://leanpub.com/datamungingwithperl)
 - [Example code and errata reports](https://perlschool.com/books/data-munging/)
 - [Author: Dave Cross](https://davecross.co.uk/)
